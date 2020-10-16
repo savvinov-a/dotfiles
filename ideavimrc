@@ -1,6 +1,13 @@
 set vim-surround
 set vim-multiple-cursors
 let mapleader = " "
-nmap <leader><leader>s :action KJumpAction<cr>
-nmap <leader><leader>w :action KJumpAction.Word0<cr>
-nmap <leader><leader>l :action KJumpAction.Line<cr>
+nmap <leader>s :action KJumpAction<cr>
+nmap <leader>w :action KJumpAction.Word0<cr>
+nmap <leader>l :action KJumpAction.Line<cr>
+nmap <leader>gi :action GotoImplementation<cr>
+nmap <leader>def :action RestoreDefaultLayout<cr>
+nmap <leader>movo :action MoveEditorToOppositeTabGroup<cr>
+nmap <leader>fmt :action GoFmtFileAction<cr>
+nmap <leader>reopen :action ReopenClosedTab<cr>
+nmap <leader>be :action Back<cr>
+nmap <leader>n :action NextProjectWindow<cr>

@@ -2,7 +2,7 @@ task default: %w[install]
 
 task :install do
   puts "Initializing"
-  files = %w{vimrc zshrc tmux.conf}
+  files = %w{vimrc zshrc tmux.conf ideavimrc}
   files.each do |file|
     puts "Moving original ~/.#{file} to ~/.#{file}.backup"
     move_file(file)

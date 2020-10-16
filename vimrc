@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Valloric/YouCompleteMe'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
