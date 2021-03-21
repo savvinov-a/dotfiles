@@ -12,10 +12,11 @@ fi
   export ZSH=$HOME/.oh-my-zsh
   export PATH=$HOME/Downloads/GoLand-2018.3.3/bin:$PATH
   export PATH=$HOME/Downloads/RubyMine-2018.3.3/bin/:$PATH
-  export PATH=$PATH:$GOPATH/bin
   export GOPATH=$HOME/Projects/gopath
+  export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:/home/savvinovan/.gem/ruby/2.6.0/bin
   export PATH=$HOME/.cargo/bin:$PATH
+  export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
 
 alias hm="hostname"
 alias sk="cat ~/.ssh/id_rsa.pub"
@@ -77,3 +78,5 @@ source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
