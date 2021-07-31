@@ -11,6 +11,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-surround'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'SirVer/ultisnips'
 
 " Colorschemes
 " Plug 'morhetz/gruvbox'
@@ -21,6 +23,8 @@ call plug#end()
 set encoding=utf-8
 syntax on
 let g:mapleader=' '
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 colorscheme jellybeans 
 set background=dark
 set number

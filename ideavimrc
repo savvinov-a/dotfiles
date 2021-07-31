@@ -19,6 +19,7 @@ nmap <leader>n :action NextProjectWindow<cr>
 nmap <leader>rr :action Rerun<cr>
 nmap <leader>ru :action Run<cr>
 nmap <leader>rc :action RunCoverage<cr>
+nmap <leader>ttp :action TestTreePopupMenu<cr>
 nmap <M-g> :action Switcher<cr>
 nnoremap g; :action JumpToLastChange<CR>
 nnoremap g, :action JumpToNextChange<CR>

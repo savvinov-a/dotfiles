@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -17,10 +18,14 @@ fi
   export PATH=$PATH:/home/savvinovan/.gem/ruby/2.6.0/bin
   export PATH=$HOME/.cargo/bin:$PATH
   export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
-
+  export GIT_TERMINAL_PROMPT=1
+  export TRUCK_API_HOST=http://localhost:8091
+  export TRUCK_API_ACCESS_KEY=8QmuN6s9ab43zGxbkU
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 alias hm="hostname"
 alias sk="cat ~/.ssh/id_rsa.pub"
 alias lc='colorls -lA --sd'
+alias vim='nvim'
 # Open modified files
 # ACMR = Added || Copied || Modified || Renamed
 alias v="vim"
@@ -32,6 +37,8 @@ alias boldoc="cd /Users/aleksandr/Projects/go/boltalka-docs"
 alias gitl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias gpg="gpg --keyserver keys.gnupg.net"
 alias readlink=greadlink
+alias gotest="go test -v -cover -race ./..."
+alias golint="golangci-lint run -E=revive -E=stylecheck -E=gosec -E=goconst -E=gocyclo -E=lll -E=nakedret -E=gocritic -E=gochecknoglobals -E=gomnd -E=unconvert -E=dupl ./..."
 
 # List files after cding
 chpwd() {
@@ -44,6 +51,7 @@ plugins=(
   vi-mode
   docker
   docker-compose
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -80,3 +88,5 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
