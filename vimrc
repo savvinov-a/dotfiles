@@ -32,6 +32,7 @@ set expandtab
 set tabstop=2
 set hlsearch
 set incsearch
+set mouse=a
 
 " mappings
 
