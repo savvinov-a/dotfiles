@@ -73,6 +73,7 @@ set expandtab
 set cc=120
 
 set list listchars=tab:»·,trail:·
+set clipboard=unnamed
 
 augroup myfiletypes
   " Clear old autocmds in group

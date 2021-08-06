@@ -13,7 +13,7 @@ fi
   export ZSH=$HOME/.oh-my-zsh
   export PATH=$HOME/Downloads/GoLand-2018.3.3/bin:$PATH
   export PATH=$HOME/Downloads/RubyMine-2018.3.3/bin/:$PATH
-  export GOPATH=$HOME/Projects/gopath
+  export GOPATH=$HOME/projects/go/gopath
   export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:/home/savvinovan/.gem/ruby/2.6.0/bin
   export PATH=$HOME/.cargo/bin:$PATH
