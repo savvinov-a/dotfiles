@@ -3,6 +3,9 @@ set vim-multiple-cursors
 set clipboard=unnamedplus,unnamed 
 set relativenumber
 set number
+set visualbell
+set noerrorbells
+set NERDTree
 
 let mapleader = " "
 
@@ -10,6 +13,7 @@ nmap <leader>s :action KJumpAction<cr>
 nmap <leader>w :action KJumpAction.Word0<cr>
 nmap <leader>l :action KJumpAction.Line<cr>
 nmap <leader>gi :action GotoImplementation<cr>
+nmap <leader>goimp :action GoImportsFileAction<cr>
 nmap <leader>def :action RestoreDefaultLayout<cr>
 nmap <leader>movo :action MoveEditorToOppositeTabGroup<cr>
 nmap <leader>fmt :action GoFmtFileAction<cr>
@@ -20,9 +24,15 @@ nmap <leader>rr :action Rerun<cr>
 nmap <leader>ru :action Run<cr>
 nmap <leader>rc :action RunCoverage<cr>
 nmap <leader>ttp :action TestTreePopupMenu<cr>
-nmap <leader>h :action NextSplitter<cr>
-nmap <leader>k :action NextTab<cr>
+nmap <leader>tta :action HTTPClient.RunAll<cr>
+nmap <C-h> :action NextSplitter<cr>
+nmap <leader>l :action NextSplitter<cr>
+nmap <C-l> :action NextSplitter<cr>
 nmap <leader>j :action PreviousTab<cr>
+nmap <leader>dis :action ToggleDistractionFreeMode<cr>
+nmap <leader>ren :action RenameElement<cr>
+nmap <C-n> :NERDTreeToggle<cr>
+nmap <leader>n :NERDTreeToggle<cr>
 nmap <M-g> :action Switcher<cr>
 nnoremap g; :action JumpToLastChange<CR>
 nnoremap g, :action JumpToNextChange<CR>
