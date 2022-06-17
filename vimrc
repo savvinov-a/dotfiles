@@ -3,8 +3,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'ThePrimeagen/harpoon'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+"Plug 'kyazdani42/nvim-web-devicons' " for file icons
+"Plug 'kyazdani42/nvim-tree.lua'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
@@ -27,12 +27,32 @@ Plug 'wakatime/vim-wakatime'
 " Colorschemes
 Plug 'morhetz/gruvbox'
 " Plug 'nanotech/jellybeans.vim'
+Plug 'github/copilot.vim'
+Plug 'akinsho/toggleterm.nvim'
+" Treesitter
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/playground'
+"Plug 'romgrk/nvim-treesitter-context'
+Plug 'preservim/nerdtree'
+" BarBar
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
+" Tagbar
+" brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+Plug 'majutsushi/tagbar'
+" Vim Fugitive
+Plug 'tpope/vim-fugitive'
+" Vim Fugitive plugin for github
+Plug 'tpope/vim-rhubarb'
+" Treesitter config
+" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+" lua require'savvinovan/nvim-tree'.setup {}
+"
 
 " disable go def mappings
 let g:go_def_mapping_enabled = 0
 let g:EasyMotion_do_mapping = 0
 call plug#end()
-lua require'nvim-tree'.setup {}
 autocmd vimenter * ++nested colorscheme gruvbox
 set encoding=utf-8
 set hlsearch!
@@ -48,37 +68,7 @@ nnoremap <silent><C-t> :lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <silent><C-n> :lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <silent><C-s> :lua require("harpoon.ui").nav_file(4)<CR>
 
-" nvim configuriation
-let g:nvim_tree_auto_open = 1
-let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 0,
-    \ }
-
-let g:nvim_tree_icons = {
-    \ 'default': '',
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   }
-    \ }
-
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 let g:mapleader=' '
 let g:go_def_mode='gopls'
@@ -133,7 +123,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " mappings
 
-map <C-n> :NvimTreeToggle<CR>
+" map <C-n> :NvimTreeToggle<CR>
 
 " mappings For EasyMotion
 let g:EasyMotion_smartcase = 1
@@ -352,3 +342,45 @@ nnoremap <silent> <space>cocp  :<C-u>CocListResume<CR>
 " FZF
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
+
+" BarBar mappings
+" Move to previous/next
+nnoremap <silent>    gT :BufferPrevious<CR>
+nnoremap <silent>    gt :BufferNext<CR>
+" Re-order to previous/next
+nnoremap <silent>    <M-<> :BufferMovePrevious<CR>
+nnoremap <silent>    <M->> :BufferMoveNext<CR>
+" Goto buffer in position...
+nnoremap <silent>    <M-1> :BufferGoto 1<CR>
+nnoremap <silent>    <M-2> :BufferGoto 2<CR>
+nnoremap <silent>    <M-3> :BufferGoto 3<CR>
+nnoremap <silent>    <M-4> :BufferGoto 4<CR>
+nnoremap <silent>    <M-5> :BufferGoto 5<CR>
+nnoremap <silent>    <M-6> :BufferGoto 6<CR>
+nnoremap <silent>    <M-7> :BufferGoto 7<CR>
+nnoremap <silent>    <M-8> :BufferGoto 8<CR>
+nnoremap <silent>    <M-9> :BufferGoto 9<CR>
+nnoremap <silent>    <M-0> :BufferLast<CR>
+" Pin/unpin buffer
+nnoremap <silent>    <M-p> :BufferPin<CR>
+" Close buffer
+nnoremap <silent>    <Leader>c :BufferClose<CR>
+" Wipeout buffer
+"                          :BufferWipeout<CR>
+" Close commands
+"                          :BufferCloseAllButCurrent<CR>
+"                          :BufferCloseAllButPinned<CR>
+"                          :BufferCloseAllButCurrentOrPinned<CR>
+"                          :BufferCloseBuffersLeft<CR>
+"                          :BufferCloseBuffersRight<CR>
+" Magic buffer-picking mode
+nnoremap <silent> <C-p>    :BufferPick<CR>
+" Sort automatically by...
+nnoremap <silent> <Space>bb :BufferOrderByBufferNumber<CR>
+nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
+
+" Other:
+" :BarbarEnable - enables barbar (enabled by default)
+" :BarbarDisable - very bad command, should never be used
