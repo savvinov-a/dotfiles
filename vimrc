@@ -1,75 +1,93 @@
+" =============== Plugins ================
 call plug#begin('~/.vim/plugged')
-
+" Plenary used by telescope and yode
 Plug 'nvim-lua/plenary.nvim'
+" FZF in window
 Plug 'nvim-telescope/telescope.nvim'
+" Store buffers on hotkeys
 Plug 'ThePrimeagen/harpoon'
-"Plug 'kyazdani42/nvim-web-devicons' " for file icons
-"Plug 'kyazdani42/nvim-tree.lua'
+" Insert or delete brackets, parens, quotes in pair.
 Plug 'jiangmiao/auto-pairs'
+" Move to specific symbols
 Plug 'easymotion/vim-easymotion'
+" show git diff near line numbers
 Plug 'airblade/vim-gitgutter'
+" Fzf, buffer, tag something like ctrl+p in Visual Studio Code
 Plug 'kien/ctrlp.vim'
+" like fzf but deprecated
 Plug 'rking/ag.vim'
+" ruby 
 Plug 'vim-ruby/vim-ruby'
+" git blame
 Plug 'f-person/git-blame.nvim'
+" ruby on rails
 Plug 'tpope/vim-rails'
+" nice looking status/tabline 
 Plug 'vim-airline/vim-airline'
+" surrounding tags etc
 Plug 'tpope/vim-surround'
+" custom snippets
 Plug 'SirVer/ultisnips'
+" code editing snippets
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" go for vim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" git
 Plug 'jreybert/vimagit'
+" fzf 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'nvim-lua/plenary.nvim'
+" show code on windows
 Plug 'hoschi/yode-nvim'
+" Track your coding time
 Plug 'wakatime/vim-wakatime'
-" Colorschemes
-Plug 'morhetz/gruvbox'
-" Plug 'nanotech/jellybeans.vim'
+" Color theme
+Plug 'arcticicestudio/nord-vim'
+" Plug 'morhetz/gruvbox'
+" Github copilot
 Plug 'github/copilot.vim'
+" Terminal in vim (Yo dawg, i heard you like vim, so we put terminal
+" in yo vim so you can run vim inside vim @ Xzibit)
 Plug 'akinsho/toggleterm.nvim'
-" Treesitter
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'nvim-treesitter/playground'
-"Plug 'romgrk/nvim-treesitter-context'
+" Project tree plugin
 Plug 'preservim/nerdtree'
-" BarBar
+" BarBar - tabs
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
-" Tagbar
+" Tagbar - syntax tree of code, dependency (ctags)
 " brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 Plug 'majutsushi/tagbar'
 " Vim Fugitive
 Plug 'tpope/vim-fugitive'
 " Vim Fugitive plugin for github
 Plug 'tpope/vim-rhubarb'
-" Treesitter config
-" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-" lua require'savvinovan/nvim-tree'.setup {}
-"
+Plug 'fannheyward/telescope-coc.nvim'
+" Debug adapter protocol
+Plug 'mfussenegger/nvim-dap'
+" Debug golang dlv
+Plug 'leoluz/nvim-dap-go'
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Floating terminal
+Plug 'numToStr/FTerm.nvim'
+call plug#end()
+" ========================= /Plugins ==========================
 
+" ========================= Configs ===========================
+"
+lua require('dap-go').setup()
+
+lua require('telescope').load_extension('coc')
+" Colorscheme
+colorscheme nord
+autocmd vimenter * ++nested colorscheme nord
 " disable go def mappings
 let g:go_def_mapping_enabled = 0
 let g:EasyMotion_do_mapping = 0
-call plug#end()
-autocmd vimenter * ++nested colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
 set encoding=utf-8
 set hlsearch!
 syntax on
-
-" harpoon config
-nnoremap <leader>hrp :lua require("harpoon.mark").add_file()<CR>
-nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <silent><leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
-
-nnoremap <silent><C-h> :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <silent><C-t> :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <silent><C-n> :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <silent><C-s> :lua require("harpoon.ui").nav_file(4)<CR>
-
-nnoremap <C-n> :NERDTreeToggle<CR>
-
 let g:mapleader=' '
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
@@ -79,14 +97,8 @@ set expandtab
 set tabstop=2
 set incsearch
 set mouse=a
-""" -------------------- fzf-vim -------------------------
 " Fuzzy-finder for vim
-
 set rtp+=~/.fzf
-
-" Customize fzf colors to match colorscheme
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, { 'options': ['--color', 'fg:252,bg:233,hl:#ff8787,fg+:252,bg+:235,hl+:#ff0000,info:0,prompt:161,spinner:135,pointer:135,marker:118'] }, <bang>0)
-
 " Pin the fzf window at the bottom
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.3, 'xoffset': 0, 'yoffset': 100 } }
 
@@ -114,77 +126,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
-
-" mappings for telescope
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" mappings
-
-" map <C-n> :NvimTreeToggle<CR>
-
-" mappings For EasyMotion
+" Easymotion
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-overwin-f)
-
-" mappings CocNext
+" Coc
 let g:coc_enable_locationlist = 0
-autocmd User CocLocationsChange CocList --no-quit --normal location
-
-map <C-]> :CocNext<CR>
-map <C-[> :CocPrev<CR>
-
-map <silent> <C-h> :call WinMove('h')<CR>
-map <silent> <C-j> :call WinMove('j')<CR>
-map <silent> <C-k> :call WinMove('k')<CR>
-map <silent> <C-l> :call WinMove('l')<CR> 
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> gi :call GoImplements<CR>
-nnoremap <silent> <leader>no :nohl<CR>
-
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>ttp  <Plug>(go-run)
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" YODE CONFIG
-lua require('yode-nvim').setup({})
-map <Leader>yc      :YodeCreateSeditorFloating<CR>
-map <Leader>yr :YodeCreateSeditorReplace<CR>
-nmap <Leader>bd :YodeBufferDelete<cr>
-imap <Leader>bd <esc>:YodeBufferDelete<cr>
-" these commands fall back to overwritten keys when cursor is in split window
-map <C-W>r :YodeLayoutShiftWinDown<CR>
-map <C-W>R :YodeLayoutShiftWinUp<CR>
-map <C-W>J :YodeLayoutShiftWinBottom<CR>
-map <C-W>K :YodeLayoutShiftWinTop<CR>
-" at the moment this is needed to have no gap for floating windows
-set showtabline=2
-
-" WinMove bindings
-function! WinMove(key) 
-let t:curwin = winnr() 
-exec "wincmd ".a:key
-if (t:curwin == winnr())
-if (match(a:key,'[jk]'))
-wincmd v
- else
-wincmd s
-endif
-exec "wincmd ".a:key
-endif
-endfunction
 
 filetype plugin indent on
 " show existing
@@ -203,7 +148,29 @@ set cc=120
 
 " set list listchars=tab:»·,trail:·
 set clipboard=unnamed
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Only show signcolumn on errors
+set signcolumn=auto
+
+" Russian langmap
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+lua require('yode-nvim').setup({})
+" at the moment this is needed to have no gap for floating windows
+set showtabline=2
 augroup myfiletypes
   " Clear old autocmds in group
   autocmd!
@@ -224,23 +191,82 @@ autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
 autocmd ColorScheme * highlight SignColumn guibg=#adadad
 autocmd ColorScheme * highlight CocWarningSign guibg=#ffffff
 
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
+" let g:gruvbox_contrast_dark = 'hard'
 
-" Give more space for displaying messages.
-set cmdheight=2
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+" ========================= Configs ===========================
+"
+" ========================= Bindings ==========================
+" floating term binding
+" vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+" vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+lua require('savvinovan.fterm')
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+nnoremap <leader>hrp :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
 
-" Only show signcolumn on errors
-set signcolumn=auto
+nnoremap <silent><C-h> :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent><C-t> :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent><C-n> :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent><C-s> :lua require("harpoon.ui").nav_file(4)<CR>
 
+nnoremap <C-n> :NERDTreeToggle<CR>
+" telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" mappings For EasyMotion
+nmap s <Plug>(easymotion-overwin-f)
+" Coc
+map <C-]> :CocNext<CR>
+map <C-[> :CocPrev<CR>
+" WinMove
+map <silent> <C-h> :call WinMove('h')<CR>
+map <silent> <C-j> :call WinMove('j')<CR>
+map <silent> <C-k> :call WinMove('k')<CR>
+map <silent> <C-l> :call WinMove('l')<CR> 
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> gi :call GoImplements<CR>
+nnoremap <silent> <leader>no :nohl<CR>
+
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>ttp  <Plug>(go-run)
+autocmd User CocLocationsChange CocList --no-quit --normal location
+" WinMove bindings
+function! WinMove(key) 
+let t:curwin = winnr() 
+exec "wincmd ".a:key
+if (t:curwin == winnr())
+if (match(a:key,'[jk]'))
+wincmd v
+ else
+wincmd s
+endif
+exec "wincmd ".a:key
+endif
+endfunction
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+map <Leader>yc      :YodeCreateSeditorFloating<CR>
+map <Leader>yr :YodeCreateSeditorReplace<CR>
+nmap <Leader>bd :YodeBufferDelete<cr>
+imap <Leader>bd <esc>:YodeBufferDelete<cr>
+" these commands fall back to overwritten keys when cursor is in split window
+map <C-W>r :YodeLayoutShiftWinDown<CR>
+map <C-W>R :YodeLayoutShiftWinUp<CR>
+map <C-W>J :YodeLayoutShiftWinBottom<CR>
+map <C-W>K :YodeLayoutShiftWinTop<CR>
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -282,6 +308,11 @@ function! s:show_documentation()
   endif
 endfunction
 
+" ========================= /Bindings =========================
+
+" 
+" ========================= Other settings =====================
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -308,10 +339,10 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gr <cmd>Telescope coc references<cr>
+nnoremap <silent> gd <cmd>Telescope coc definitions<cr>
+nnoremap <silent> gy <cmd>Telescope coc type-definitions<cr>
+nnoremap <silent> gi <cmd>Telescope coc implementations<cr>
 
 " Use U to show documentation in preview window
 nnoremap <silent> U :call <SID>show_documentation()<CR>
@@ -340,8 +371,8 @@ nnoremap <silent> <space>cock  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>cocp  :<C-u>CocListResume<CR>
 
 " FZF
-nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <C-f> <cmd>Telescope find_files<cr>
+nnoremap <silent> <Leader>f <cmd>Telescope find_files<cr>
 
 " BarBar mappings
 " Move to previous/next

@@ -36,3 +36,5 @@ nmap <leader>n :NERDTreeToggle<cr>
 nmap <M-g> :action Switcher<cr>
 nnoremap g; :action JumpToLastChange<CR>
 nnoremap g, :action JumpToNextChange<CR>
+nmap <leader>dn :action NextOccurence<cr>
+map <leader>dr :action Debugger.ResumeThread<cr>
