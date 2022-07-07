@@ -12,7 +12,7 @@ let mapleader = " "
 nmap <leader>s :action KJumpAction<cr>
 nmap <leader>w :action KJumpAction.Word0<cr>
 nmap <leader>l :action KJumpAction.Line<cr>
-nmap <leader>gi :action GotoImplementation<cr>
+nmap gi :action GotoImplementation<cr>
 nmap <leader>goimp :action GoImportsFileAction<cr>
 nmap <leader>def :action RestoreDefaultLayout<cr>
 nmap <leader>movo :action MoveEditorToOppositeTabGroup<cr>
@@ -25,13 +25,14 @@ nmap <leader>ru :action Run<cr>
 nmap <leader>rc :action RunCoverage<cr>
 nmap <leader>ttp :action TestTreePopupMenu<cr>
 nmap <leader>tta :action HTTPClient.RunAll<cr>
-nmap <C-h> :action NextSplitter<cr>
-nmap <leader>l :action NextSplitter<cr>
-nmap <C-l> :action NextSplitter<cr>
+nmap <C-h> :action NextSplitter<CR>
+nmap <leader>l :action NextSplitter<CR>
+nmap <C-l> :action NextSplitter<CR>
 nmap <leader>j :action PreviousTab<cr>
 nmap <leader>dis :action ToggleDistractionFreeMode<cr>
 nmap <leader>ren :action RenameElement<cr>
 nmap <C-n> :NERDTreeToggle<cr>
+map <F10> :action de.netnexus.CamelCasePlugin.ToggleCamelCase<cr>
 nmap <leader>n :NERDTreeToggle<cr>
 nmap <M-g> :action Switcher<cr>
 nnoremap g; :action JumpToLastChange<CR>

@@ -37,7 +37,7 @@ alias boldoc="cd /Users/aleksandr/Projects/go/boltalka-docs"
 alias gitl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias gpg="gpg --keyserver keys.gnupg.net"
 alias readlink=greadlink
-alias gotest="go test -v -cover -race ./..."
+# alias gotest="go test -v -cover -race ./..."
 alias golint="golangci-lint run -E=revive -E=stylecheck -E=gosec -E=goconst -E=gocyclo -E=lll -E=nakedret -E=gocritic -E=gochecknoglobals -E=gomnd -E=unconvert -E=dupl ./..."
 
 # List files after cding
