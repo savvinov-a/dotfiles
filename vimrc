@@ -71,6 +71,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Floating terminal
 Plug 'numToStr/FTerm.nvim'
 call plug#end()
+
 " ========================= /Plugins ==========================
 
 " ========================= Configs ===========================

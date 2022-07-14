@@ -70,12 +70,19 @@ Plug 'leoluz/nvim-dap-go'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Floating terminal
 Plug 'numToStr/FTerm.nvim'
+" nvim tree
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 call plug#end()
 " ========================= /Plugins ==========================
 
 " ========================= Configs ===========================
 "
 lua require('dap-go').setup()
+lua require('basic')
+lua require('nvim-tree-config')
+
+command! -nargs=0 SayHello lua require("basic").hello()
 
 lua require('telescope').load_extension('coc')
 " Colorscheme
@@ -211,7 +218,7 @@ nnoremap <silent><C-t> :lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <silent><C-n> :lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <silent><C-s> :lua require("harpoon.ui").nav_file(4)<CR>
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
 " telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
