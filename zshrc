@@ -39,6 +39,8 @@ alias gpg="gpg --keyserver keys.gnupg.net"
 alias readlink=greadlink
 # alias gotest="go test -v -cover -race ./..."
 alias golint="golangci-lint run -E=revive -E=stylecheck -E=gosec -E=goconst -E=gocyclo -E=lll -E=nakedret -E=gocritic -E=gochecknoglobals -E=gomnd -E=unconvert -E=dupl ./..."
+# preview files using fzf like in vim
+alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 
 # List files after cding
 chpwd() {

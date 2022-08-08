@@ -73,15 +73,23 @@ Plug 'numToStr/FTerm.nvim'
 " nvim tree
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+" Debug
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'leoluz/nvim-dap-go'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-telescope/telescope-dap.nvim'
+" Show bindings
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 call plug#end()
 " ========================= /Plugins ==========================
 
 " ========================= Configs ===========================
 "
-lua require('dap-go').setup()
-lua require('basic')
-lua require('nvim-tree-config')
 
+lua require('savvinovan.dap-go-config')
+lua require('savvinovan.basic')
+lua require('nvim-tree-config')
 command! -nargs=0 SayHello lua require("basic").hello()
 
 lua require('telescope').load_extension('coc')
@@ -208,6 +216,9 @@ autocmd ColorScheme * highlight CocWarningSign guibg=#ffffff
 " vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 " vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 lua require('savvinovan.fterm')
+
+" WhichKey binding
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 nnoremap <leader>hrp :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
