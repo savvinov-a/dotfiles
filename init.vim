@@ -1,11 +1,11 @@
 " =============== Plugins ================
 call plug#begin('~/.vim/plugged')
+" commented that doesnt work
+Plug 'preservim/nerdcommenter' 
 " Plenary used by telescope and yode
 Plug 'nvim-lua/plenary.nvim'
 " FZF in window
 Plug 'nvim-telescope/telescope.nvim'
-" Store buffers on hotkeys
-Plug 'ThePrimeagen/harpoon'
 " Insert or delete brackets, parens, quotes in pair.
 Plug 'jiangmiao/auto-pairs'
 " Move to specific symbols
@@ -15,19 +15,19 @@ Plug 'airblade/vim-gitgutter'
 " Fzf, buffer, tag something like ctrl+p in Visual Studio Code
 Plug 'kien/ctrlp.vim'
 " like fzf but deprecated
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 " ruby 
-Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-ruby/vim-ruby'
 " git blame
 Plug 'f-person/git-blame.nvim'
 " ruby on rails
-Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-rails'
 " nice looking status/tabline 
 Plug 'vim-airline/vim-airline'
 " surrounding tags etc
 Plug 'tpope/vim-surround'
 " custom snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " code editing snippets
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " go for vim
@@ -40,7 +40,7 @@ Plug 'junegunn/fzf.vim'
 " show code on windows
 Plug 'hoschi/yode-nvim'
 " Track your coding time
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 " Color theme
 Plug 'arcticicestudio/nord-vim'
 " Plug 'morhetz/gruvbox'
@@ -50,7 +50,7 @@ Plug 'github/copilot.vim'
 " in yo vim so you can run vim inside vim @ Xzibit)
 Plug 'akinsho/toggleterm.nvim'
 " Project tree plugin
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 " BarBar - tabs
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
@@ -62,10 +62,6 @@ Plug 'tpope/vim-fugitive'
 " Vim Fugitive plugin for github
 Plug 'tpope/vim-rhubarb'
 Plug 'fannheyward/telescope-coc.nvim'
-" Debug adapter protocol
-Plug 'mfussenegger/nvim-dap'
-" Debug golang dlv
-Plug 'leoluz/nvim-dap-go'
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Floating terminal
@@ -217,6 +213,10 @@ autocmd ColorScheme * highlight CocWarningSign guibg=#ffffff
 " vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 lua require('savvinovan.fterm')
 
+" center screen while scrolling with half screen
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " WhichKey binding
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
@@ -285,16 +285,28 @@ map <C-W>r :YodeLayoutShiftWinDown<CR>
 map <C-W>R :YodeLayoutShiftWinUp<CR>
 map <C-W>J :YodeLayoutShiftWinBottom<CR>
 map <C-W>K :YodeLayoutShiftWinTop<CR>
+
+
+" COC CONFIG
+"
+"
 " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -305,26 +317,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" GoTo code navigation.
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
 
 " ========================= /Bindings =========================
 
